@@ -12,34 +12,40 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
+
 import static fpij.Folks.friends;
 
 public class PickAnElementElegant {
-  public static void pickName(
-    final List<String> names, final String startingLetter) {
-      
-    final Optional<String> foundName = 
-      names.stream()
-           .filter(name ->name.startsWith(startingLetter))
-           .findFirst();
-      
-    System.out.println(String.format("A name starting with %s: %s",
-      startingLetter, foundName.orElse("No name found")));
-  }
+	public static void pickEmail(final List<String> emails, final String domain) {
+		Predicate<String> emailFilter = Pattern.compile("^(.+)@" + domain + "$").asPredicate();
+		Predicate<String> emailFilterChosogia = Pattern.compile("^(.+)@chosogia.com$").asPredicate();
+		final Optional<String> foundEmail = emails.stream().filter(emailFilter).findFirst();
+		System.out.println(String.format("Email with domain %s: %s", domain, foundEmail.orElse("No email found")));
+	}
 
-  public static void main(final String[] args) {
-System.out.println("//" + "START:NAME_OUTPUT");
-    pickName(friends, "N");
-    pickName(friends, "Z");
-System.out.println("//" + "END:NAME_OUTPUT");
+	public static void pickName(final List<String> names, final String startingLetter) {
 
-    final Optional<String> foundName = 
-      friends.stream()
-             .filter(name ->name.startsWith("N"))
-             .findFirst();
+		final Optional<String> foundName = names.stream().filter(name -> name.startsWith(startingLetter)).findFirst();
 
-System.out.println("//" + "START:CLOSURE_OUTPUT");
-    foundName.ifPresent(name -> System.out.println("Hello " + name));
-System.out.println("//" + "END:CLOSURE_OUTPUT");
-  }
+		System.out.println(
+				String.format("A name starting with %s: %s", startingLetter, foundName.orElse("No name found")));
+	}
+
+	public static void main(final String[] args) {
+		System.out.println("//" + "START:NAME_OUTPUT");
+		pickName(friends, "N");
+		pickName(friends, "Z");
+		System.out.println("//" + "END:NAME_OUTPUT");
+
+		final Optional<String> foundName = friends.stream().filter(name -> name.startsWith("N")).findFirst();
+
+		System.out.println("//" + "START:CLOSURE_OUTPUT");
+		foundName.ifPresent(name -> System.out.println("Hello " + name));
+		System.out.println("//" + "END:CLOSURE_OUTPUT");
+
+		List<String> emails = Arrays.asList("hoaigubkin@gmail.com", "hoahong@gmail.com", "aodai@yahoo.com","admin@chosogia.com");
+		pickEmail(emails,"chosogia.com");
+	}
 }
