@@ -8,54 +8,49 @@
 ***/
 package fpij;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-import static fpij.Folks.friends;
 import static fpij.Folks.comrades;
 import static fpij.Folks.editors;
+import static fpij.Folks.friends;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class PickElementsMultipleCollection {
-  public static void main(final String[] args) {
-{
-    final long countFriendsStartN = 
-      friends.stream()
-             .filter(name -> name.startsWith("N")).count();
+	public static void main(final String[] args) {
+		{
+			final long countFriendsStartN = friends.stream().filter(name -> name.startsWith("N")).count();
 
-    final long countEditorsStartN = 
-      editors.stream()
-             .filter(name -> name.startsWith("N")).count();
+			final long countEditorsStartN = editors.stream().filter(name -> name.startsWith("N")).count();
 
-    final long countComradesStartN = 
-      comrades.stream()
-              .filter(name -> name.startsWith("N")).count();
+			final long countComradesStartN = comrades.stream().filter(name -> name.startsWith("N")).count();
 
-    System.out.println(countFriendsStartN);
-    System.out.println(countComradesStartN);
-    System.out.println(countEditorsStartN);
-}
+			System.out.println(countFriendsStartN);
+			System.out.println(countComradesStartN);
+			System.out.println(countEditorsStartN);
+		}
 
-{
-    final Predicate<String> startsWithN = name -> name.startsWith("N");
+		{
+			final Predicate<String> startsWithN = name -> name.startsWith("N");
 
-    final long countFriendsStartN = 
-      friends.stream()
-             .filter(startsWithN)
-             .count();
-    final long countEditorsStartN = 
-      editors.stream()
-             .filter(startsWithN)
-             .count();
-    final long countComradesStartN = 
-      comrades.stream()
-              .filter(startsWithN)
-              .count();
+		
 
-    System.out.println(countFriendsStartN);
-    System.out.println(countComradesStartN);
-    System.out.println(countEditorsStartN);
-}
-  }
+			final long countFriendsStartN = friends.stream().filter(startsWithN).count();
+			final long countEditorsStartN = editors.stream().filter(startsWithN).count();
+			final long countComradesStartN = comrades.stream().filter(startsWithN).count();
+
+			System.out.println(countFriendsStartN);
+			System.out.println(countComradesStartN);
+			System.out.println(countEditorsStartN);
+		}
+		{
+		
+			Predicate<String> emailFilter = Pattern.compile("^(.+)@gmail.com$").asPredicate();
+			List<String> emails = Arrays.asList("hoaigubkin@gmail.com","hoahong@gmail.com","aodai@yahoo.com");
+			List<String> gemails = emails.stream().filter(emailFilter).collect(Collectors.<String>toList());
+			gemails.forEach(email-> System.out.println(email));
+		}
+	}
 }

@@ -8,10 +8,12 @@
 ***/
 package fpij;
 
-import java.util.List;
+import static fpij.Folks.friends;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import static fpij.Folks.friends;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Transform {
   public static void main(final String[] args) {
@@ -61,5 +63,17 @@ System.out.println("//" + "END:NUMBER_OUTPUT");
     friends.stream()
            .map(String::toUpperCase)
            .forEach(name -> System.out.println(name));
+    
+    List<String> hoai  = Arrays.asList("thap ten","vuong dao sdf sdf", "toi di tim em");
+    List<String> hoai2  = new ArrayList<String>();
+    hoai.forEach(name -> hoai2.add(name.toUpperCase()));
+    System.out.println(hoai2);
+    hoai.stream().map(name->name.length())
+    .forEach(count -> System.out.print(count + " "));
+    hoai.stream().filter(name -> name.startsWith("t")).forEach(name->System.out.println(name));
+    final List<String> startWithT = 
+    		hoai.stream().filter(name->name.startsWith("t")).collect(Collectors.toList());
+    System.out.println(startWithT);
+    System.out.println(String.format("found %d names", startWithT.size()));
   }
 }

@@ -25,5 +25,11 @@ public class DiscountFunctional {
             .reduce(BigDecimal.ZERO, BigDecimal::add);
 
     System.out.println("Total of discounted prices: " + totalOfDiscountedPrices);
+    final BigDecimal total2 =
+    		prices.stream()
+    		.filter(price -> price.compareTo(BigDecimal.valueOf(10)) > 0)
+    		.map(price -> price.multiply(BigDecimal.valueOf(0.8)))
+    		.reduce(BigDecimal.ZERO, BigDecimal::add);
+    System.out.println("Total of discounted prices 20%: " + total2);
   }
 }

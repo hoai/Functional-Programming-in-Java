@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.function.Function;
 import static fpij.Folks.friends;
 
@@ -19,7 +21,10 @@ public class PickDifferentNames {
   public static Predicate<String> checkIfStartsWith(final String letter) {
     return name -> name.startsWith(letter);
   }
-  
+  public static Predicate<String> checkGmail(final String domain){
+	  Predicate<String> emailFilter = Pattern.compile("^(.+)@"+domain+"$").asPredicate(); 
+	  return emailFilter;
+  }
   public static void main(final String[] args) {
 {
     final Predicate<String> startsWithN = name -> name.startsWith("N");
@@ -99,6 +104,13 @@ public class PickDifferentNames {
 
     System.out.println(countFriendsStartN);
     System.out.println(countFriendsStartB);
+}
+
+{
+	
+	List<String> emails = Arrays.asList("hoaigubkin@gmail.com","hoahong@gmail.com","aodai@yahoo.com");
+	List<String> gemails = emails.stream().filter(checkGmail("yahoo.com")).collect(Collectors.<String>toList());
+	gemails.forEach(email-> System.out.println(email));
 }
 
   }

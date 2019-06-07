@@ -42,5 +42,8 @@ public class Iteration {
     friends.forEach(name -> System.out.println(name));
 
     friends.forEach(System.out::println);
+    List<String> hoai =  Arrays.asList("hoai beo", "hoai map");
+    hoai.forEach(name->System.out.println(name));
+    
   }
 }
