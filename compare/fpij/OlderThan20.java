@@ -21,10 +21,21 @@ import static java.util.stream.Collectors.*;
 public class OlderThan20 {
   public static void main(String[] args) {
     final List<Person> people = Arrays.asList(
-      new Person("John", 20),
-      new Person("Sara", 21),
-      new Person("Jane", 21),
-      new Person("Greg", 35));
+    		new Person("John", 20, "male"),
+    	      new Person("Sara", 21, "shemale"),
+    	      new Person("Jane", 21, "shemale"),
+    	      new Person("Greg", 35, "male"));
+    
+    {
+    	
+    	//List<Person> olderThan20 = new ArrayList<>();
+    	List<Person> olderThan20 =  people.stream().filter(p -> p.getAge() > 20).collect(toList());
+    	System.out.println(olderThan20);
+    	Map<String, List<Person>> peopleByGender = people.stream().collect(Collectors.groupingBy(Person::getGender));
+    	System.out.println(peopleByGender);
+    	Map<Integer, List<Person>> peopleByAge = people.stream().collect(Collectors.groupingBy(Person::getAge));
+    	System.out.println(peopleByAge);
+    }
 
 {  
     System.out.println("//" + "START:MUTABLE_OUTPUT");

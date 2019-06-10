@@ -46,6 +46,6 @@ public class PickAnElementElegant {
 		System.out.println("//" + "END:CLOSURE_OUTPUT");
 
 		List<String> emails = Arrays.asList("hoaigubkin@gmail.com", "hoahong@gmail.com", "aodai@yahoo.com","admin@chosogia.com");
-		pickEmail(emails,"chosogia.com");
+		pickEmail(emails,"gmail.com");
 	}
 }

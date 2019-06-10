@@ -25,10 +25,27 @@ public class Compare {
   
   public static void main(String[] args) {
     final List<Person> people = Arrays.asList(
-      new Person("John", 20),
-      new Person("Sara", 21),
-      new Person("Jane", 21),
-      new Person("Greg", 35));
+      new Person("John", 20, "male"),
+      new Person("Sara", 21, "shemale"),
+      new Person("Jane", 21, "shemale"),
+      new Person("Greg", 35, "male"));
+    
+    {
+    	System.out.println("//" + "START:Hoai AGE_ASCEND_OUTPUT");
+    	Comparator<Person> compareAsc = (p1,p2) -> p1.hoaiAgeDiff(p2);
+    	Comparator<Person> compareDesc = (p1,p2) -> p2.hoaiAgeDiff(p1);
+    	Comparator<Person> compareName = (p1, p2) -> p1.getName().compareTo(p2.getName());
+    	Comparator<Person> compareGender = (p1, p2) -> p1.getGender().compareTo(p2.getGender());
+    	List<Person> hoaiAscAge = people.stream().sorted(compareGender).collect(toList());
+    	hoaiAscAge.forEach(System.out::println);
+    	
+    	people.stream().max(compareAsc).ifPresent(y->System.out.println("eldest" + y));
+    	final Function<Person, String> byName = person -> person.getName();
+    	final Function<Person, String> byGender = person -> person.getGender();
+    	List<Person> hoaiAscGenderAndAscAge = people.stream().sorted(comparing(byGender).thenComparing(byName)).collect(toList());
+    	hoaiAscGenderAndAscAge.forEach(System.out::println);
+    	
+    }
 
 {  
     System.out.println("//" + "START:AGE_ASCEND_OUTPUT");

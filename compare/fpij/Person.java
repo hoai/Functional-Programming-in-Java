@@ -11,20 +11,28 @@ package fpij;
 public class Person {
   private final String name;
   private final int age;
+  private final String gender;
   
-  public Person(final String theName, final int theAge) {
+  public Person(final String theName, final int theAge, final String theGender) {
     name = theName;
     age = theAge;
+    gender = theGender;
   } 
   
   public String getName() { return name; }
   public int getAge() { return age; }
+  public String getGender() {
+	  return gender;
+  }
   
   public int ageDifference(final Person other) {
     return age - other.age;
   }
+  public int hoaiAgeDiff(final Person other) {
+	  return age - other.age;
+  }
   
   public String toString() {
-    return String.format("%s - %d", name, age);
+	  return String.format("%s - %d - %s", name, age, gender);
   }
 }

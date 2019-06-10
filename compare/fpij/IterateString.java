@@ -52,6 +52,12 @@ public class IterateString {
     str.chars()
        .filter(Character::isDigit)
        .forEach(IterateString::printChar);
+    
+    final String hoai = "hoai00tw";
+    System.out.println("//" + "hoai start --");
+    //hoai.chars().forEach(ch -> System.out.println((char)ch));
+    hoai.chars().mapToObj(ch -> Character.valueOf((char)ch))
+    .forEach(System.out::println);
 
   }
 }
